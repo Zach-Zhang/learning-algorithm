@@ -18,7 +18,7 @@ package com.zach.alogrithm.easy;
 public class TwoSum {
 
     public static void main(String[] args) {
-        int[] ret = twoSum(new int[]{2,7,11,15},9);
+        int[] ret = twoSum(new int[]{2,3,4},6);
         System.out.println(ret[0]+"------------"+ret[1]);
     }
 
@@ -29,7 +29,7 @@ public class TwoSum {
       while (i<j) {
         sum = numbers[i]+numbers[j];
         if(sum == target)
-            return new int[]{i+1,j+1};
+            return new int[]{i,j};
         else if(sum<target)
             i++;
         else
