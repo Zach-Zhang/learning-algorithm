@@ -1,4 +1,4 @@
-package com.zach.alogrithm.easy.array;
+package com.zach.alogrithm.easy;
 
 import java.util.HashMap;
 import java.util.Map;
