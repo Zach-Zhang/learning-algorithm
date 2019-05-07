@@ -3,9 +3,11 @@ package com.zach.datastructure.video.dynamicarray;
 public class Main {
     public static void main(String[] args) {
         Array<Integer> arr = new Array<>();
+        arr.set(0,2);
         for (int i = 0; i < 10; i++) {
             arr.addLast(i);
         }
+
 
         System.out.println(arr);
 
