@@ -31,12 +31,10 @@ public class DynamicArrayQueue {
             for (int i = head; i <tail ; i++) {
                 items[i-head] = items[i];
             }
-
             //搬完之后重新更新head 和tail
             tail -= head;
             head = 0;
         }
-
         items[tail] = item;
         tail++;
         return true;

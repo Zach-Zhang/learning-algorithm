@@ -5,154 +5,150 @@ package com.zach.geekbang.alogrithm;
  */
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] a = {4,5,6,3,2,9};
-        //System.out.println(binarySearch(a,5));
-        System.out.println(1+(3-1)>>1);
+        int[] a = {1, 3, 4, 5, 6, 8, 8, 8, 9, 10, 11};
+        int[] b = {3,4,6,7,10};
+        System.out.println("查找第一个等于value的值,实现方案一: "+binarySearchFirstOne(a, 10));
+        System.out.println("找第一个等于value的值,实现方案二: "+binarySearchFirstTwo(a, 8));
+        System.out.println("查找最后一个等于value得元素: "+binarySearchLast(a, 10));
+        System.out.println("查找第一个大于给定值的元素: "+bindSearchFirstGreatOrEqual(b, 5));
+        System.out.println("查找最后一位小于等于value的元素: "+bindSearchLastLessOrEqual(a, 0));
     }
 
-    public static int binarySearch(int[]A,int value) {
+    /**
+     * 查找第一个等于value的值,实现方案一
+     *
+     * @param a
+     * @param value
+     * @return
+     */
+    public static int binarySearchFirstOne(int[] a, int value) {
+        int n = a.length;
         int low = 0;
-        int len = A.length;
-        int high = len -1;
+        int high = n - 1;
 
-        while(low <= high) {
-            int mid =low+((high - low)>>1);
-            if(A[mid] == value)
-                return mid;
-            else if (A[mid] < value)
-                low = mid +1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] >= value)
+                high = mid - 1;
             else
-                high = mid -1;
+                low = mid + 1;
         }
-        return -1;
-    }
-
-    /**
-     * 二分法搜索的递归实现
-     */
-    public static int bsearch(int[] a,int n,int val) {
-        return bsearchInternally(a,0,n-1,val);
-    }
-
-    private static int bsearchInternally(int[] a,int low,int high,int value) {
-        if(low >high)
-            return -1;
-        int mid = low +((high - low)>> 1);
-        if(a[mid] == value) {
-            return mid;
-        }else if(a[mid] < value)
-            return bsearchInternally(a,mid+1,high,value);
-        else {
-            return bsearchInternally(a,low,mid-1,value);
-        }
-    }
-
-
-    /**
-     * 二分法变形: 查找第一个值等于给定值得元素;
-     */
-    public int findFirstValue(int[] a, int n,int value) {
-        int low = 0;
-        int high = n-1;
-        while (low <= high) {
-            int mid = low + ((high - low)>>1);
-            if(a[mid]>=value) {
-                high = mid -1;
-            }else {
-                low = mid +1;
-            }
-        }
-
-        if(low <n && a[low] == value)
+        if (low < n && a[low] == value) {
             return low;
-        else
+        } else {
             return -1;
-
-    }
-
-    /**
-     * 二查找第一个值等于给定值得元素(二);
-     */
-    public int getFirstValue(int[] a,int n,int value) {
-        int low = 0;
-        int high = n -1;
-        while (low <= high){
-            int mid  = low +((high - low)>> 1);
-            if(a[mid]>value)
-                high = mid -1;
-            else if (a[mid]< value)
-                low = mid +1;
-            else {
-                if(mid == 0 || a[mid -1] != value)
-                    return mid;
-                else
-                    high = mid -1;
-            }
         }
-        return -1;
     }
 
     /**
-     * 二分查找最后一个值等于给定值的元素;
+     * 查找第一个等于value的值,实现方案二
+     *
+     * @param a
+     * @param value
+     * @return
      */
-    public int findLastValue(int[] a,int n,int value) {
+    public static int binarySearchFirstTwo(int[] a, int value) {
+        int n = a.length;
         int low = 0;
-        int high = n-1;
-        while (low <= high){
-            int mid = low +((high-low)>>1);
-            if(a[mid]>value)
-                high = mid -1;
-            else if (a[mid]<value)
-                low = mid +1;
-            else {
-                if(mid == n-1 || a[mid+1] != value)
-                    return mid;
-                else
-                    low = mid +1;
-            }
-        }
-        return -1;
-    }
+        int high = n - 1;
 
-    /**
-     * 二分查找: 查找第一个大与等于给定值的元素
-     */
-    public int findGreateOrEqual(int[] a,int n,int value) {
-        int low = 0;
-        int high = n-1;
         while (low <= high) {
-            int mid = low + ((high - low)>>1);
-            if(a[mid]>= value) {
-                if(mid == 0 || a[mid-1]<value)
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value)
+                high = mid - 1;
+            else if (a[mid] < value)
+                low = mid + 1;
+            else {
+                //当a[mid]=value时,若mid=0,则mid肯定是第一个元素,或者a[mid-1]!=value,则mid前面的元素都是小于value的,
+                // 因为数组是有序的,所以mid就是第一个等于value的值
+                if (mid == 0 || a[mid - 1] != value)
                     return mid;
                 else
-                    high = mid -1;
-            }else {
-                low = mid +1;
+                    high = mid - 1;
             }
         }
         return -1;
     }
 
     /**
-     * 查找最后一个小于等于给定值的元素
+     * 查找最后一个等于value得元素
+     *
+     * @param a
+     * @param value
+     * @return
      */
-    public int bsearch7(int[] a,int n,int value) {
+    public static int binarySearchLast(int[] a, int value) {
         int low = 0;
-        int high = n-1;
+        int n = a.length;
+        int high = n - 1;
         while (low <= high) {
-            int mid = low + ((high - low)>> 1);
-            if(a[mid]>value)
-                high = mid -1;
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value)
+                high = mid - 1;
+            else if (a[mid] < value)
+                low = mid + 1;
             else {
-                if(mid == n-1 || a[mid+1]>value)
+                //当a[mid]=value时,若mid=n-1,则mid肯定是第一个元素,或者a[mid+1]!=value,则mid后面的元素都是大于value的,
+                // 因为数组是有序的,所以mid就是最后一个等于value的值
+                if (mid == n - 1 || a[mid + 1] != value)
                     return mid;
                 else
-                    low = mid +1;
+                    low = mid + 1;
             }
         }
         return -1;
     }
 
+
+    /**
+     * 查找第一个大于等于给定值的元素
+     * @param a
+     * @param value
+     * @return
+     */
+    public static int bindSearchFirstGreatOrEqual(int[] a, int value) {
+        int n = a.length;
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] >= value) {
+                if (mid == 0 || a[mid - 1] < value)
+                    return mid;
+                else
+                    high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 查找最后一位小于等于value的元素
+     * @param a
+     * @param value
+     * @return
+     */
+    public static int bindSearchLastLessOrEqual(int[] a, int value) {
+        int n = a.length;
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value) {
+                high = mid - 1;
+            } else {
+                if(mid==n-1 || a[mid+1]>value){
+                    return mid;
+                }else{
+                    low = mid + 1;
+                }
+
+            }
+        }
+        return -1;
+    }
 }
-
