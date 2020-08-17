@@ -45,7 +45,7 @@ public class MatrixPath {
                 return true;
             }
         }
-        marked[row][col] = false;//搜索完一轮,没有找到之后,如需将原有的标记搜索的状态清楚,即回溯,方便开始下一轮的搜索
+        marked[row][col] = false;//搜索完一轮,没有找到之后,如需将原有的标记搜索的状态清除,即回溯,方便开始下一轮的搜索
         return false;
     }
 
