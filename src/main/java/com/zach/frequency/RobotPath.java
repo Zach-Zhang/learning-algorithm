@@ -12,11 +12,19 @@ import java.util.Queue;
 public class RobotPath {
 
     public static void main(String[] args) {
-
+        CommonDFS commonDFS = new CommonDFS();
+        OptimizeDFS optimizeDFS = new OptimizeDFS();
+        OptimizeBFS optimizeBFS = new OptimizeBFS();
+        int c1 = optimizeDFS.movingCount(10, 20, 18);
+        int c2 = commonDFS.movingCount(18, 10, 20);
+        int c3 = optimizeBFS.movingCount(10, 20, 18);
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c3);
     }
 
     //普通的DFS搜索算法
-    public class CommonDFS {
+    public static class CommonDFS {
         //记录可达格数
         private int cnt = 0;
         private final int[][] next = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
@@ -104,7 +112,7 @@ public class RobotPath {
      * 时间复杂度 O(MN) ： 最差情况下，机器人遍历矩阵所有单元格，此时时间复杂度为 O(MN)。
      * 空间复杂度 O(MN) ： 最差情况下，Set visited 内存储矩阵所有单元格的索引，使用 O(MN)的额外空间。
      */
-    public class OptimizeDFS {
+    public static class OptimizeDFS {
         int m, n, k;
         boolean[][] visited;
 
@@ -112,12 +120,13 @@ public class RobotPath {
             this.m = m;
             this.n = n;
             this.k = k;
+            this.visited = new boolean[m][n];
             return dfs(0, 0, 0, 0);
         }
 
         private int dfs(int i, int j, int si, int sj) {
             //当行列索引越界 或 数位和超出目标值 k 或 当前元素已访问过 时，返回 0 ，代表不计入可达解。
-            if (i > m || j >= n || k < si + sj || visited[i][j]) {
+            if (i >= m || j >= n || k < si + sj || visited[i][j]) {
                 return 0;
             }
             visited[i][j] = true;
@@ -145,7 +154,7 @@ public class RobotPath {
      * 时间复杂度 O(MN)O(MN) ： 最差情况下，机器人遍历矩阵所有单元格，此时时间复杂度为 O(MN)。
      * 空间复杂度 O(MN)O(MN) ： 最差情况下，Set visited 内存储矩阵所有单元格的索引，使用 O(MN)的额外空间。
      */
-    public class OptimizeBFS {
+    public static class OptimizeBFS {
         public int movingCount(int m, int n, int k) {
             boolean[][] visited = new boolean[m][n];
             int res = 0;
@@ -159,10 +168,13 @@ public class RobotPath {
                 }
                 visited[i][j] = true;
                 res++;
-                queue.add(new int[]{i + 1, j, (i + 1) % 10 == 0 ? si + 1 : si - 8, sj});
-                queue.add(new int[]{i, j + 1, si, (sj + 1) % 10 == 0 ? sj + 1 : sj - 8});
+                queue.add(new int[]{i + 1, j, (i + 1) % 10 != 0 ? si + 1 : si - 8, sj});
+                queue.add(new int[]{i, j + 1, si, (j + 1) % 10 != 0 ? sj + 1 : sj - 8});
             }
             return res++;
         }
+
+
+
     }
 }
