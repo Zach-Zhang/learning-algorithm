@@ -1,5 +1,8 @@
 package com.zach.frequency;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 地上有一个 m行和 n列的方格。一个机器人从坐标 (0,0)的格子开始移动，每一次只能向左右上下四个方向移动一
  * 格，但是不能进入行坐标和列坐标的数位之和大于 k 的格子。
@@ -7,7 +10,6 @@ package com.zach.frequency;
  * 3+5+3+8=19。请问该机器人能够达到多少个格子？
  */
 public class RobotPath {
-
 
     public static void main(String[] args) {
 
@@ -96,6 +98,11 @@ public class RobotPath {
      * 三角形内的解虽然都满足数位和要求，但由于机器人每步只能走一个单元格，而三角形间不一定是连通的，因此机器人不一定能到达，称之为 不可达解 ；同理，可到达的解称为 可达解 （
      * <p>
      * 结论： 根据可达解的结构，易推出机器人可 仅通过向右和向下移动，访问所有可达解
+     * 复杂度分析：
+     * M,N 分别为矩阵行列大小。
+     * <p>
+     * 时间复杂度 O(MN) ： 最差情况下，机器人遍历矩阵所有单元格，此时时间复杂度为 O(MN)。
+     * 空间复杂度 O(MN) ： 最差情况下，Set visited 内存储矩阵所有单元格的索引，使用 O(MN)的额外空间。
      */
     public class OptimizeDFS {
         int m, n, k;
@@ -119,4 +126,43 @@ public class RobotPath {
         }
     }
 
+    /**
+     * 广度优先遍历BFS
+     * BFS/DFS ： 两者目标都是遍历整个矩阵，不同点在于搜索顺序不同。DFS 是朝一个方向走到底，再回退，以此类推；BFS 则是按照“平推”的方式向前搜索。
+     * BFS 实现： 通常利用队列实现广度优先遍历。
+     * 算法解析：
+     * 初始化： 将机器人初始点 (0, 0) 加入队列 queue ；
+     * 迭代终止条件： queue 为空。代表已遍历完所有可达解。
+     * 迭代工作：
+     * 单元格出队： 将队首单元格的 索引、数位和 弹出，作为当前搜索单元格。
+     * 判断是否跳过： 若 ① 行列索引越界 或 ② 数位和超出目标值 k 或 ③ 当前元素已访问过 时，执行 continue 。
+     * 标记当前单元格 ：将单元格索引 (i, j) 存入 Set visited 中，代表此单元格 已被访问过 。
+     * 单元格入队： 将当前元素的 下方、右方 单元格的 索引、数位和 加入 queue 。
+     * 返回值： Set visited 的长度 len(visited) ，即可达解的数量。
+     * 复杂度分析：
+     * M, NM,N 分别为矩阵行列大小。
+     * <p>
+     * 时间复杂度 O(MN)O(MN) ： 最差情况下，机器人遍历矩阵所有单元格，此时时间复杂度为 O(MN)。
+     * 空间复杂度 O(MN)O(MN) ： 最差情况下，Set visited 内存储矩阵所有单元格的索引，使用 O(MN)的额外空间。
+     */
+    public class OptimizeBFS {
+        public int movingCount(int m, int n, int k) {
+            boolean[][] visited = new boolean[m][n];
+            int res = 0;
+            Queue<int[]> queue = new LinkedList<>();
+            queue.add(new int[]{0, 0, 0, 0});
+            while (queue.size() > 0) {
+                int[] x = queue.poll();
+                int i = x[0], j = x[1], si = x[2], sj = x[3];
+                if (i >= m || j >= n || k < si + sj || visited[i][j]) {
+                    continue;
+                }
+                visited[i][j] = true;
+                res++;
+                queue.add(new int[]{i + 1, j, (i + 1) % 10 == 0 ? si + 1 : si - 8, sj});
+                queue.add(new int[]{i, j + 1, si, (sj + 1) % 10 == 0 ? sj + 1 : sj - 8});
+            }
+            return res++;
+        }
+    }
 }
