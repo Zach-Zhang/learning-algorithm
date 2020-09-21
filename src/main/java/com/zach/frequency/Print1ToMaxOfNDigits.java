@@ -26,6 +26,7 @@ public class Print1ToMaxOfNDigits {
     private static void print1ToMaxOfNDigits(char[] number, int digit) {
         //递归的边界就是就是n=digit,即打印到最后一位
         if (digit == number.length) {
+            //打印高位的数字
             printNumber(number);
             return;
         }
