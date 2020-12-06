@@ -48,6 +48,7 @@ public class IsSubTree {
         A.right = right1;
         TreeNode B = new TreeNode(4);
         B.left = new TreeNode(1);
+        A = null;
         System.out.println(isSubTree(A, B));
     }
 
@@ -58,7 +59,7 @@ public class IsSubTree {
      * @Param [A, B]
      **/
     private static boolean isSubTree(TreeNode A, TreeNode B) {
-        return (A != null && B != null) && recur(A, B) || isSubTree(A.left, B) || isSubTree(A.right, B);
+        return (A != null && B != null) && (recur(A, B) || isSubTree(A.left, B) || isSubTree(A.right, B));
     }
 
     /**
