@@ -109,6 +109,7 @@ public class PrintMatrix {
             int nextRow = row + directions[directIndex][0];
             int nextColumn = column + directions[directIndex][1];
             if (nextRow < 0 || nextRow >= rows || nextColumn < 0 || nextColumn >= columns || visited[nextRow][nextColumn]) {
+                //顺时针旋转
                 directIndex = (directIndex + 1) % 4;
             }
             row += directions[directIndex][0];
