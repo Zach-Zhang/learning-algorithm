@@ -2,6 +2,7 @@ package com.zach.frequency;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -29,12 +30,12 @@ public class SerializeTree {
     }
 
     /**
-     * 序列化
+     * BFS 序列化
      *
      * @param root 根节点
      * @return
      */
-    public String serialize(TreeNode root) {
+    public String serializeBFS(TreeNode root) {
         if (root == null) {
             return "[]";
         }
@@ -57,8 +58,9 @@ public class SerializeTree {
         return sb.toString();
     }
 
+
     /**
-     * 反序列化
+     * BFS反序列化
      *
      * @param data 序列化后的字符串
      * @return
@@ -85,6 +87,41 @@ public class SerializeTree {
             }
             i++;
         }
+        return root;
+    }
+
+    /**
+     * DFS序列化
+     *
+     * @param root
+     * @return
+     */
+    public String serializeDFS(TreeNode root) {
+        if (root == null) {
+            return "null";
+        }
+        return root.val + "," + serializeDFS(root.left) + "," + serializeDFS(root.right);
+    }
+
+    /**
+     * DFS反序列化
+     *
+     * @param data
+     * @return
+     */
+    public TreeNode deserializeDFS(String data) {
+        Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+        return dfs(queue);
+    }
+
+    private TreeNode dfs(Queue<String> queue) {
+        String val = queue.poll();
+        if ("null".equals(val)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.parseInt(val));
+        root.left = dfs(queue);
+        root.right = dfs(queue);
         return root;
     }
 
