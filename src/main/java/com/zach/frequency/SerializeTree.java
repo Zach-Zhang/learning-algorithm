@@ -65,7 +65,7 @@ public class SerializeTree {
      * @param data 序列化后的字符串
      * @return
      */
-    public TreeNode deserialize(String data) {
+    public TreeNode deserializeBFS(String data) {
         if (StringUtils.isEmpty(data)) {
             return null;
         }
