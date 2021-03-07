@@ -2,9 +2,7 @@ package com.zach.frequency;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Description: 输入一个字符串，打印出该字符串中字符的所有排列。
@@ -22,17 +20,25 @@ import java.util.List;
  */
 public class PermutationString {
     private static List<String> result = new ArrayList<>();
-
+    private static List<String> res = new LinkedList<>();
+    private static char[] chars;
     public static void main(String[] args) {
         String str = "abc";
-        System.out.println(permutationString(str));
+        System.out.println(permutation(str));
+        //System.out.println(permutationString(str));
     }
 
+    /**
+     * 回溯算法,无须交换
+     *
+     * @param str
+     * @return
+     */
     public static List<String> permutationString(String str) {
         if (StringUtils.isEmpty(str)) {
             return result;
         }
-        char[] chars = str.toCharArray();
+         chars = str.toCharArray();
         //排序
         Arrays.sort(chars);
         //深度搜索+回溯算法排列
@@ -64,6 +70,53 @@ public class PermutationString {
             hasUsed[i] = false;
 
         }
+
+    }
+
+    /**
+     * 回溯算法,需要交换元素
+     *
+     * @param str
+     * @return
+     */
+    public static List permutation(String str) {
+        if (StringUtils.isEmpty(str)) {
+            return null;
+        }
+        chars = str.toCharArray();
+        dfs(0);
+        return res;
+    }
+
+    private static void dfs(int x) {
+        //递归的终止条件
+        if (x == chars.length - 1) {
+            //添加排列方案
+            res.add(String.valueOf(chars));
+            return;
+        }
+        HashSet<Character> set = new HashSet<>();
+        for (int i = x; i < chars.length; i++) {
+            //有重复元素,剪枝
+            if (set.contains(chars[i])) {
+                continue;
+            }
+            set.add(chars[i]);
+            //交换,将chars[i]固定在第X位
+            swap(i, x);
+            //开启固定第x+1位字符
+            dfs(x + 1);
+            //撤销原来的操作,恢复到上一个节点元素
+            swap(i, x);
+
+        }
+
+    }
+
+    private static void swap(int i, int x) {
+        char temp = chars[i];
+        chars[i] = chars[x];
+        chars[x] = temp;
 
     }
 
