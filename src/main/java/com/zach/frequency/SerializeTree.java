@@ -9,7 +9,7 @@ import java.util.Queue;
 /**
  * @Description: 请实现两个函数，分别用来序列化和反序列化二叉树。
  * <p>
- * 示例: 
+ * 示例:
  * <p>
  * 你可以将以下二叉树：
  * <p>
@@ -26,7 +26,8 @@ import java.util.Queue;
  */
 public class SerializeTree {
     public static void main(String[] args) {
-
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.deleteCharAt(1);
     }
 
     /**
