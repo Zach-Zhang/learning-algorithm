@@ -24,8 +24,8 @@ public class PermutationString {
     private static char[] chars;
     public static void main(String[] args) {
         String str = "abc";
-        System.out.println(permutation(str));
-        //System.out.println(permutationString(str));
+        //System.out.println(permutation(str));
+        System.out.println(permutationString(str));
     }
 
     /**
@@ -64,10 +64,12 @@ public class PermutationString {
             }
             hasUsed[i] = true;
             strAppend.append(chars[i]);
+            System.out.println("递归之前:"+strAppend.toString());
             backTracking(chars, hasUsed, strAppend);
             //撤销操作,撤销到上一个元素
             strAppend.deleteCharAt(strAppend.length() - 1);
             hasUsed[i] = false;
+            System.out.println("递归之后:"+strAppend.toString());
 
         }
 
@@ -103,11 +105,14 @@ public class PermutationString {
             }
             set.add(chars[i]);
             //交换,将chars[i]固定在第X位
+            System.out.println("递归之前:"+Arrays.asList(chars));
             swap(i, x);
             //开启固定第x+1位字符
             dfs(x + 1);
             //撤销原来的操作,恢复到上一个节点元素
             swap(i, x);
+            System.out.println("递归之后:"+Arrays.asList(chars));
+
 
         }
 
