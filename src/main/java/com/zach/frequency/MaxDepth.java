@@ -13,7 +13,13 @@ import java.util.Queue;
  */
 public class MaxDepth {
     public static void main(String[] args) {
-
+        TreeNode root = new TreeNode(1);
+        TreeNode left = new TreeNode(new TreeNode(4), new TreeNode(5), 2);
+        TreeNode right = new TreeNode(new TreeNode(6), new TreeNode(7), 3);
+        root.setLeft(left);
+        root.setRight(right);
+        System.out.println(maxDepthDFS(root));
+        System.out.println(maxDepthBFS(root));
     }
 
     /**
@@ -28,6 +34,7 @@ public class MaxDepth {
 
     /**
      * 使用队列实现层序遍历,
+     *
      * @param root
      * @return
      */
