@@ -1,4 +1,4 @@
-package com.zach.frequency;
+package com.zach.frequency.doublepointer;
 
 /**
  * @Description:两数平方的和
