@@ -9,9 +9,10 @@ import java.io.Serializable;
  * Version :1.0
  */
 public class TreeNode implements Serializable {
-    private TreeNode left;
-    private TreeNode right;
-    private int val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode next;
+    public int val;
 
     public TreeNode(int val) {
         this.val = val;
@@ -37,6 +38,14 @@ public class TreeNode implements Serializable {
 
     public void setLeft(TreeNode left) {
         this.left = left;
+    }
+
+    public TreeNode getNext() {
+        return next;
+    }
+
+    public void setNext(TreeNode next) {
+        this.next = next;
     }
 
     public TreeNode getRight() {

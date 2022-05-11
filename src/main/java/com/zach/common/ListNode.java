@@ -7,8 +7,16 @@ package com.zach.common;
  * Version :1.0
  */
 public class ListNode {
-    private ListNode next;
-    private int data;
+    public ListNode next;
+    public int data;
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
 
     public ListNode(int data) {
         this.data = data;

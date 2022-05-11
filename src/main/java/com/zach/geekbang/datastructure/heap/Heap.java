@@ -2,7 +2,11 @@ package com.zach.geekbang.datastructure.heap;
 
 /**
  * @Classname Heap
- * @Description:
+ * @Description: 数组中下标为 i 的节点的左子节点，就是下标为 i∗2 的节点，右子节点就是下标为 i∗2+1 的节点，
+ * 父节点就是下标为 i/2 的节点。
+ * <p>
+ * 堆是一个完全二叉树；
+ * 堆中每一个节点的值都必须大于等于（或小于等于）其子树中每个节点的值。
  * @Date 2020/6/17 23:05
  * @Author: Zach
  * @version: V1.0
@@ -75,16 +79,16 @@ public class Heap {
         a[i] = a[j];
         a[j] = temp;
     }
+
     //堆排序
-    public static void sort(int[] a, int n){
+    public static void sort(int[] a, int n) {
         buildHeap(a, n);
         int k = n;
         while (k > 1) {
-            if (k > 1) {
-                swap(a, 1, k);
-                --k;
-                heapify(a, k, 1);
-            }
+            swap(a, 1, k);
+            --k;
+            heapify(a, k, 1);
+
         }
     }
 
