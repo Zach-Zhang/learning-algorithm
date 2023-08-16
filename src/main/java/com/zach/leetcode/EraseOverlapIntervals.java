@@ -66,6 +66,7 @@ public class EraseOverlapIntervals {
         if(nums.length==0){
             return 0;
         }
+        //按照区间的右端点排序
         Arrays.sort(nums,Comparator.comparingInt(n->n[1]));
         int right = nums[0][1];
         //不重复区间，最少也有一个
