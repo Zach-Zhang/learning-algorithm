@@ -77,8 +77,10 @@ public class MaxProfitV2 {
     /**
      * 动态规划
      * 动态转移方程
+     * 持有现金
      * dp[i][0] = max{dp[i-1[0],dp[i-1]+price[i]}
-     * dp[i][0] = max{dp[i-1][1],dp[i-1][0]-price[i]}
+     * 持有股票
+     * dp[i][1] = max{dp[i-1][1],dp[i-1][0]-price[i]}
      * 由于全部交易结束后，持有股票的收益一定低于不持有股票的收益，因此这时候 dp[n−1][0]\textit{dp}[n-1][0]dp[n−1][0] 的收益必然是大于 dp[n−1][1]\textit{dp}[n-1][1]dp[n−1][1] 的，最后的答案即为 dp[n−1][0]\textit{dp}[n-1][0]dp[n−1][0]。
      * @param price
      * @return
