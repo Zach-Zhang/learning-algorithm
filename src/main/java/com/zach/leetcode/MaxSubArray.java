@@ -24,7 +24,7 @@ package com.zach.leetcode;
 public class MaxSubArray {
     public static void main(String[] args) {
         int[] nums = {5,4,-1,7,8};
-        System.out.println(maxSubArray(nums));
+        System.out.println(maxSubArray2(nums));
     }
 
     /**
@@ -55,5 +55,22 @@ public class MaxSubArray {
             res = Math.max(res,dp[i]);
         }
         return res;
+    }
+
+    /**
+     * 滚动变量方法优化空间
+     * dp[i]的值只跟dp[i-1]有关
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray2(int[] nums){
+        int pre= 0;
+        int res=0;
+        for (int num : nums) {
+            //dp【i-1]<0,则pre+num大，否则num大
+            pre = Math.max(pre+num,num);
+            res = Math.max(pre,res);
+        }
+        return pre;
     }
 }
