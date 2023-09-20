@@ -40,7 +40,7 @@ public class SingleNonDuplicate {
             //若mid为奇数，则判断nums[mid]==nums[mid-1],
             //若以上判断是相等，则目标元素索引在mid的右边，移动low=mid+1
             //否则目标元素在mid的左边，令high=mid,mid也有可能是结果
-            //mid为偶数 mid^1==mid+1,mid为奇数，mid-1==mid
+            //mid为偶数 mid^1==mid+1,mid为奇数，mid^1==mid-1
             //目标元素的下标一定是偶数，因为左右两边都有偶数个元素（成对）
             if(nums[mid]==nums[mid^1]){
                 low = mid+1;
