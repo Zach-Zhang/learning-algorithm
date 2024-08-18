@@ -47,14 +47,14 @@ public class NumArray {
      * @param right
      * @return
      */
-    public int sumRegion(int left,int right){
+    public int sumRange(int left, int right){
         return preSum[right+1]-preSum[left];
     }
 
     public static void main(String[] args) {
         int[] array = {-2, 0, 3, -5, 2, -1};
         NumArray numArray = new NumArray(array);
-        int ret = numArray.sumRegion(0, 5);
+        int ret = numArray.sumRange(0, 5);
         System.out.println(ret);
     }
 }

@@ -56,7 +56,7 @@ public class NumMatrix {
      * @param c2
      * @return
      */
-    public int sumRegion(int r1, int c1, int r2, int c2) {
+    public int sumRange(int r1, int c1, int r2, int c2) {
         //目标矩阵之后由四个相邻矩阵运算获得
         return preSum[r2 + 1][c2 + 1] - preSum[r1][c2 + 1] - preSum[r2 + 1][c1] + preSum[r1][c1];
     }
@@ -64,7 +64,7 @@ public class NumMatrix {
     public static void main(String[] args) {
         int[][] matrix = {{3, 0, 1, 4, 2}, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}};
         NumMatrix numMatrix = new NumMatrix(matrix);
-        int ret = numMatrix.sumRegion(1, 2, 2, 4);
+        int ret = numMatrix.sumRange(1, 2, 2, 4);
         System.out.println(ret);
 
     }
