@@ -35,6 +35,10 @@ public class CountRangeSum {
 
     }
 
+    /**
+     * 前缀和思想处理
+     * @param nums
+     */
     public CountRangeSum(int[] nums){
         preSum = new int[nums.length+1];
         preSum[0] = 0;
