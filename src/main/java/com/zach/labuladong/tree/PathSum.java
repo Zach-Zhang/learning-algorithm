@@ -1,4 +1,4 @@
-package com.zach.labuladong.array;
+package com.zach.labuladong.tree;
 import java.util.HashMap;
 import java.util.Map;
 
