@@ -83,6 +83,20 @@ public class CheckSubarraySum {
      * 假设 prefixSum[i] % k = r, prefixSum[j] % k = r (j > i)
      * 那么 (prefixSum[j] - prefixSum[i]) % k = 0
      * 即子数组 nums[i+1...j] 的和是k的倍数
+     *为什么从头遍历可以找到中间数组
+     * 前缀和的"信息编码"
+     * 每个 prefixSum[i] 都包含了从开头到位置i的累积信息
+     * 任意子数组 nums[a...b] 的和都可以通过 prefixSum[b] - prefixSum[a-1] 计算
+     *
+     * 哈希表的历史记忆
+     * 每个 prefixSum[i] 都包含了从开头到位置i的累积信息
+     * 任意子数组 nums[a...b] 的和都可以通过 prefixSum[b] - prefixSum[a-1] 计算
+     *
+     * 如果 prefixSum[j] % k == prefixSum[i] % k (其中 i < j)
+     * 那么 (prefixSum[j] - prefixSum[i]) % k == 0
+     * 即 nums[i+1...j] 的和是 k 的倍数
+     *
+     *
      * @param nums
      * @param k
      * @return
